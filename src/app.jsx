@@ -1,7 +1,7 @@
 import { useState, useEffect } from “react”;
 import { initGoogleAuth, loadFromDrive, saveToDrive, isSignedIn } from “./drive.js”;
 
-const CLIENT_ID = “TU_CLIENT_ID_ACA”;
+const CLIENT_ID = “1012373951225-03etd81l508pfupdlrarsvkldn6jnevp.apps.googleusercontent.com”;
 
 const INC = [“Aira”,“Ingreso extra”,“Mbaeichapa”];
 const EXP = [“Colegio nenas”,“Gastos Santi”,“Gastos de trabajo”,“Gastos de la casa”,“Combustible”,“Súper”,“Ahorro”,“Imprevistos”];
