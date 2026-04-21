@@ -345,7 +345,15 @@ export default function App() {
         ce("p",{style:{fontSize:13,color:TXS,margin:0}},accs.length+" cuentas - "+txs.length+" movimientos - "+recs.length+" cobros")
       ),
       ce("div",{style:{margin:"12px 16px",background:BGS,borderRadius:12,padding:"16px",border:"1px solid "+BD}},
-         ce("div",{style:{marginBottom:16}},
+  ce("p",{style:{fontSize:14,fontWeight:500,color:TX,marginBottom:4}},"Exportar datos"),
+  ce("p",{style:{fontSize:13,color:TXS,marginBottom:8}},accs.length+" cuentas - "+txs.length+" movimientos - "+recs.length+" cobros"),
+  ce("button",{onClick:()=>{const el=document.getElementById("exportTA");if(el)el.value=JSON.stringify({accs,txs,recs,iCats,eCats},null,2);},style:{width:"100%",padding:"12px",background:BGS,color:TX,border:"1px solid "+BD,borderRadius:10,fontSize:14,fontWeight:500,cursor:"pointer",marginBottom:8}},"Mostrar mis datos"),
+  ce("textarea",{id:"exportTA",readOnly:true,onFocus:e=>e.target.select(),style:{width:"100%",boxSizing:"border-box",height:80,resize:"none",fontSize:11,fontFamily:"monospace",background:"#fff",color:TX,border:"1px solid "+BD,borderRadius:8,padding:"9px 10px",marginBottom:16}}),
+  ce("p",{style:{fontSize:14,fontWeight:500,color:TX,marginBottom:4}},"Importar datos"),
+  ce("p",{style:{fontSize:13,color:TXS,marginBottom:8}},"Pega tu JSON de respaldo para restaurar tus datos."),
+  ce("textarea",{id:"importTA",style:{width:"100%",boxSizing:"border-box",marginBottom:8,height:100,resize:"none",fontSize:12,fontFamily:"monospace",background:"#fff",color:TX,border:"1px solid "+BD,borderRadius:8,padding:"9px 10px"},placeholder:"Pega el JSON aqui..."}),
+  ce("button",{onClick:importData,style:{width:"100%",padding:"12px",background:G,color:"#fff",border:"none",borderRadius:10,fontSize:14,fontWeight:500,cursor:"pointer"}},"Importar")
+),
   ce("p",{style:{fontSize:14,fontWeight:500,color:TX,marginBottom:4}},"Exportar datos"),
   ce("p",{style:{fontSize:13,color:TXS,marginBottom:8}},accs.length+" cuentas - "+txs.length+" movimientos - "+recs.length+" cobros"),
   ce("button",{onClick:()=>{const d=JSON.stringify({accs,txs,recs,iCats,eCats},null,2);const el=document.getElementById("exportTA");if(el)el.value=d;},style:{width:"100%",padding:"12px",background:BGS,color:TX,border:"1px solid "+BD,borderRadius:10,fontSize:14,fontWeight:500,cursor:"pointer",marginBottom:8}},"Mostrar mis datos"),
