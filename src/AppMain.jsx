@@ -323,6 +323,33 @@ export default function App() {
       ),
       signedIn&&React.createElement("div",{style:{margin:"12px 16px",background:BGS,borderRadius:12,padding:"16px",border:"1px solid "+BD}},
         React.createElement("p",{style:{fontSize:13,color:TXS,margin:0}},accs.length+" cuentas - "+txs.length+" movimientos - "+recs.length+" cobros")
+      ),
+      React.createElement("div",{style:{margin:"12px 16px",background:BGS,borderRadius:12,padding:"16px",border:"1px solid "+BD}},
+        React.createElement("p",{style:{fontSize:14,fontWeight:500,color:TX,marginBottom:4}},"Importar datos manualmente"),
+        React.createElement("p",{style:{fontSize:13,color:TXS,marginBottom:10}},"Pega tu JSON de respaldo aqui para restaurar tus datos."),
+        React.createElement("textarea",{id:"importTA",style:{width:"100%",boxSizing:"border-box",marginBottom:8,height:100,resize:"none",fontSize:12,fontFamily:"monospace",background:"#fff",color:TX,border:"1px solid "+BD,borderRadius:8,padding:"9px 10px"},placeholder:"Pega el JSON aqui..."}),
+        React.createElement("button",{
+          onClick:()=>{
+            const val=document.getElementById("importTA")&&document.getElementById("importTA").value;
+            if(!val||!val.trim()){alert("Pega el JSON primero");return;}
+            try{
+              const s=val.indexOf("{"),e=val.lastIndexOf("}");
+              const d=JSON.parse(val.slice(s,e+1));
+              if(d.accounts||d.accs){
+                const a=d.accounts||d.accs||[];
+                const t=d.transactions||d.txs||[];
+                const r=d.receivables||d.recs||[];
+                const ic=d.incomeCats||d.iCats||INC;
+                const ec=d.expenseCats||d.eCats||EXP;
+                setAccs(a);setTxs(t);setRecs(r);setICats(ic);setECats(ec);
+                save(a,t,r,ic,ec);
+                alert("Datos importados correctamente");
+                document.getElementById("importTA").value="";
+              } else { alert("JSON invalido"); }
+            }catch(e){alert("Error: "+e.message);}
+          },
+          style:{width:"100%",padding:"12px",background:G,color:"#fff",border:"none",borderRadius:10,fontSize:14,fontWeight:500,cursor:"pointer"}
+        },"Importar")
       )
     ),
 
