@@ -1,5 +1,5 @@
 const FILE_NAME = "finanzas_backup.json";
-const SCOPES = "https://www.googleapis.com/auth/drive";
+const SCOPES = "https://www.googleapis.com/auth/drive.file";
 
 let tokenClient = null;
 let accessToken = null;
