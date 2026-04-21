@@ -87,16 +87,25 @@ export default function App() {
   },[]);
 
   const handleSignIn=async()=>{
+  try{
+    setStatus("Conectando...");
+    await signIn();
+    setSignedIn(true);
+    setStatus("Cargando desde Drive...");
     try{
-      setStatus("Conectando...");
-      await signIn();
-      setSignedIn(true);
-      setStatus("Cargando desde Drive...");
       const d=await loadFromDrive();
-      if(d){applyData(d);toast_("Datos cargados desde Drive");}
-      setStatus("Conectado a Drive");
-    }catch(e){setStatus("Error: "+e);}
-  };
+      if(d){
+        applyData(d);
+        toast_("Datos cargados desde Drive");
+        setStatus("Conectado a Drive");
+      } else {
+        setStatus("Conectado a Drive - sin datos previos");
+      }
+    }catch(e){
+      setStatus("Conectado - error al cargar: "+e);
+    }
+  }catch(e){setStatus("Error: "+e);}
+};
 
   const save=async(a,t,r,ic,ec)=>{
     const d={accs:a||accs,txs:t||txs,recs:r||recs,iCats:ic||iCats,eCats:ec||eCats,savedAt:new Date().toISOString()};
